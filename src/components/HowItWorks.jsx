@@ -1,8 +1,25 @@
 import React from 'react'
 import { chipImg, frameImg, frameVideo } from '../utils'
 import { Grid, Typography } from '@mui/material'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { ScrollTrigger } from "gsap/all"
+gsap.registerPlugin(ScrollTrigger);
 
 const HowItWorks = () => {
+  useGSAP(()=>{
+    gsap.to('.bottom-text',{
+      scrollTrigger: {trigger: '.bottom-text',
+        toggleActions: 'restart reverse restart reverse',
+      start: 'top 85%',
+      },
+      y: 0,
+      duration: 0.5, 
+      ease: 'power2.inOut',
+      opacity: 1,
+    })
+  },[])
+
   return (
     <div className='bg-black w-screen py-32'>
         <div>
@@ -32,7 +49,7 @@ const HowItWorks = () => {
          <p className="text-gray font-semibold text-center mt-3">Honkai: Star Rail</p>
 
         <Grid container spacing={14} className='mt-20 justify-center mx-auto'>
-                <Grid size={4.5} item className="flex flex-1 justify-center flex-col gap-4">
+                <Grid size={4.5} item className="flex flex-1 flex-col gap-4 translate-y-10 bottom-text opacity-0">
                   <Typography variant='h6' className="text-gray">
                     A17 Pro is an entirely new class of iPhone chip that delivers our {' '}
                     <span className="text-white">
@@ -49,7 +66,7 @@ const HowItWorks = () => {
                   </Typography>
                 </Grid>
 
-              <Grid size={4.5} item className="flex-1 flex flex-col text-gray">
+              <Grid size={4.5} item className="flex-1 flex flex-col text-gray translate-y-10 bottom-text opacity-0">
                 <Typography variant='h6'>New</Typography>
                 <Typography variant='h3' className="text-white">Pro-class GPU</Typography>
                 <Typography variant='h6'>with 6 cores</Typography>
